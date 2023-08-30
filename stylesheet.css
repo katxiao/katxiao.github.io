@@ -1,0 +1,39 @@
+body, html {
+  font-family: 'Montserrat';
+}
+
+body, html, #main-page {
+  height: 100%;
+}
+
+#main-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+h1 {
+  font-size: 36px;
+}
+
+h6 {
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 14px;
+  letter-spacing: .2em;
+  margin-bottom: 20px;
+  margin-top: 45px;
+}
+
+a {
+  text-decoration: none !important;
+  color: #3498db !important;
+}
+
+a:hover {
+  text-decoration: none !important;
+  color: #551A8B !important;
+}
