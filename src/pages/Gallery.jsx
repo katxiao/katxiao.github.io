@@ -1,5 +1,6 @@
-import { useRef } from 'react';
+import { useRef, useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
+import { AnimatePresence, motion } from 'framer-motion';
 import DraggablePhoto, { CARD_W, CARD_H } from '../components/DraggablePhoto';
 import { ceramicItems } from '../data/ceramics';
 
@@ -19,10 +20,28 @@ function getInitialPosition(index) {
 }
 
 export default function Gallery() {
-  // Shared ref: { [id]: { x: MotionValue, y: MotionValue } }
-  // Each card registers itself here so others can read positions and push them.
   const allMotionValues = useRef({});
   const canvasRef = useRef(null);
+  const [stars, setStars] = useState([]);
+  const lastStarTime = useRef(0);
+
+  const emitStars = useCallback((cx, cy) => {
+    const now = Date.now();
+    if (now - lastStarTime.current < 40) return;
+    lastStarTime.current = now;
+
+    const batch = Array.from({ length: 2 }, () => ({
+      id: Math.random(),
+      x: cx + (Math.random() - 0.5) * 30,
+      y: cy + (Math.random() - 0.5) * 30,
+      size: 10 + Math.random() * 8,
+    }));
+
+    setStars(s => [...s, ...batch]);
+    setTimeout(() => {
+      setStars(s => s.filter(star => !batch.some(b => b.id === star.id)));
+    }, 900);
+  }, []);
 
   const canvasHeight = Math.ceil(ceramicItems.length / COLS) * ROW_GAP + 120;
 
@@ -34,6 +53,20 @@ export default function Gallery() {
       </header>
 
       <div ref={canvasRef} style={{ ...styles.canvas, minHeight: canvasHeight }}>
+        <AnimatePresence>
+          {stars.map(star => (
+            <motion.span
+              key={star.id}
+              initial={{ opacity: 0.85, scale: 1, x: star.x, y: star.y }}
+              animate={{ opacity: 0, scale: 0.2, y: star.y - 30 }}
+              transition={{ duration: 0.85, ease: 'easeOut' }}
+              style={{ ...styles.star, fontSize: star.size }}
+            >
+              ✦
+            </motion.span>
+          ))}
+        </AnimatePresence>
+
         {ceramicItems.map((item, i) => {
           const { x, y } = getInitialPosition(i);
           return (
@@ -48,6 +81,7 @@ export default function Gallery() {
               initialY={y}
               allMotionValues={allMotionValues}
               canvasRef={canvasRef}
+              emitStars={emitStars}
             />
           );
         })}
@@ -87,5 +121,15 @@ const styles = {
     margin: '0 auto',
     width: COLS * COL_GAP + OFFSET_X * 2,
     maxWidth: '100%',
+  },
+  star: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    color: '#c8a96e',
+    pointerEvents: 'none',
+    userSelect: 'none',
+    zIndex: 200,
+    lineHeight: 1,
   },
 };

@@ -1,14 +1,13 @@
 from PIL import Image, ImageDraw, ImageFont
 import os
-import numpy as np
 
 # — CONFIG —
 
 INPUT_DIR = "ceramics_originals"       # folder with your original photos
 OUTPUT_DIR = "ceramics"      # where processed images will be saved
 WATERMARK_TEXT = "© Katharine Xiao"
-MAX_WIDTH = 1200               # max width in pixels (height scales automatically)
-JPEG_QUALITY = 95              # 75 is good for web; lower = smaller file
+MAX_WIDTH = 1600               # max width in pixels (height scales automatically)
+JPEG_QUALITY = 75              # 75 is good for web; lower = smaller file
 FONT_SIZE_RATIO = 0.04         # watermark text size as fraction of image width
 OPACITY = 120                  # 0 (invisible) to 255 (fully opaque)
 
@@ -25,13 +24,11 @@ for filename in os.listdir(INPUT_DIR):
     
     with Image.open(input_path) as img:
         img = img.convert("RGBA")
-        icc_profile = img.info.get("icc_profile")
 
         # --- Resize ---
         if img.width > MAX_WIDTH:
             ratio = MAX_WIDTH / img.width
             new_size = (MAX_WIDTH, int(img.height * ratio))
-
             img = img.resize(new_size, Image.LANCZOS)
     
         # --- Watermark ---
@@ -64,7 +61,7 @@ for filename in os.listdir(INPUT_DIR):
         background.paste(img.convert("RGBA"), mask=img.split()[3])
         img = background
 
-        img.save(output_path, "JPEG", quality=JPEG_QUALITY, optimize=True, icc_profile=icc_profile)
+        img.save(output_path, "JPEG", quality=JPEG_QUALITY, optimize=True)
         print(f"Saved: {output_path}")
 
 print("Done!")

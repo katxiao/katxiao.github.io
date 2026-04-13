@@ -68,7 +68,7 @@ function resolveAllCollisions({ draggedId, allValues, maxX, maxY }) {
   return targets;
 }
 
-export default function DraggablePhoto({ id, src, hoverSrc, title, description, initialX, initialY, allMotionValues, canvasRef }) {
+export default function DraggablePhoto({ id, src, hoverSrc, title, description, initialX, initialY, allMotionValues, canvasRef, emitStars }) {
   const x = useMotionValue(initialX);
   const y = useMotionValue(initialY);
   const [srcFailed, setSrcFailed] = useState(false);
@@ -89,6 +89,11 @@ export default function DraggablePhoto({ id, src, hoverSrc, title, description, 
       maxX: canvas.offsetWidth - CARD_W,
       maxY: canvas.offsetHeight - CARD_H,
     };
+  }
+
+  function handleDrag() {
+    resolveCollisions();
+    emitStars?.(x.get() + CARD_W / 2, y.get() + CARD_H / 2);
   }
 
   function resolveCollisions() {
@@ -138,7 +143,7 @@ export default function DraggablePhoto({ id, src, hoverSrc, title, description, 
       whileHover="hover"
       whileDrag={{ scale: 1.03, zIndex: 50 }}
       style={{ ...styles.card, x, y }}
-      onDrag={resolveCollisions}
+      onDrag={handleDrag}
     >
       <div style={styles.imageContainer}>
         {(src && !srcFailed) ? (
@@ -194,7 +199,7 @@ export default function DraggablePhoto({ id, src, hoverSrc, title, description, 
   );
 }
 
-const transition = { duration: 0.3, ease: 'easeOut' };
+const transition = { duration: 0.55, ease: 'easeInOut' };
 
 const overlayVariants = {
   rest:  { opacity: 0, y: 6 },
