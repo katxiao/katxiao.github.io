@@ -6,7 +6,7 @@ import os
 INPUT_DIR = "ceramics_originals"       # folder with your original photos
 OUTPUT_DIR = "ceramics"      # where processed images will be saved
 WATERMARK_TEXT = "© Katharine Xiao"
-MAX_WIDTH = 1600               # max width in pixels (height scales automatically)
+MAX_WIDTH = 800               # max width in pixels (height scales automatically)
 JPEG_QUALITY = 75              # 75 is good for web; lower = smaller file
 FONT_SIZE_RATIO = 0.04         # watermark text size as fraction of image width
 OPACITY = 120                  # 0 (invisible) to 255 (fully opaque)
