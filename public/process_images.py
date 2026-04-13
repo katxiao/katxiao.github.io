@@ -31,11 +31,8 @@ for filename in os.listdir(INPUT_DIR):
         if img.width > MAX_WIDTH:
             ratio = MAX_WIDTH / img.width
             new_size = (MAX_WIDTH, int(img.height * ratio))
-            img_linear = img.point(lambda x: (x / 255) ** 2.2 * 255)  # decode gamma
-            img_linear = img_linear.resize(new_size, Image.LANCZOS)
-            img = img_linear.point(lambda x: (x / 255) ** (1/2.2) * 255)  # re-encode
 
-            #img = img.resize(new_size, Image.LANCZOS)
+            img = img.resize(new_size, Image.LANCZOS)
     
         # --- Watermark ---
         overlay = Image.new("RGBA", img.size, (0, 0, 0, 0))
