@@ -1,5 +1,6 @@
 from PIL import Image, ImageDraw, ImageFont
 import os
+import numpy as np
 
 # — CONFIG —
 
@@ -7,7 +8,7 @@ INPUT_DIR = "ceramics_originals"       # folder with your original photos
 OUTPUT_DIR = "ceramics"      # where processed images will be saved
 WATERMARK_TEXT = "© Katharine Xiao"
 MAX_WIDTH = 1200               # max width in pixels (height scales automatically)
-JPEG_QUALITY = 75              # 75 is good for web; lower = smaller file
+JPEG_QUALITY = 95              # 75 is good for web; lower = smaller file
 FONT_SIZE_RATIO = 0.04         # watermark text size as fraction of image width
 OPACITY = 120                  # 0 (invisible) to 255 (fully opaque)
 
@@ -24,12 +25,17 @@ for filename in os.listdir(INPUT_DIR):
     
     with Image.open(input_path) as img:
         img = img.convert("RGBA")
-    
+        icc_profile = img.info.get("icc_profile")
+
         # --- Resize ---
         if img.width > MAX_WIDTH:
             ratio = MAX_WIDTH / img.width
             new_size = (MAX_WIDTH, int(img.height * ratio))
-            img = img.resize(new_size, Image.LANCZOS)
+            img_linear = img.point(lambda x: (x / 255) ** 2.2 * 255)  # decode gamma
+            img_linear = img_linear.resize(new_size, Image.LANCZOS)
+            img = img_linear.point(lambda x: (x / 255) ** (1/2.2) * 255)  # re-encode
+
+            #img = img.resize(new_size, Image.LANCZOS)
     
         # --- Watermark ---
         overlay = Image.new("RGBA", img.size, (0, 0, 0, 0))
@@ -57,8 +63,11 @@ for filename in os.listdir(INPUT_DIR):
         img = Image.alpha_composite(img, overlay)
     
         # --- Save ---
-        img = img.convert("RGB")
-        img.save(output_path, "JPEG", quality=JPEG_QUALITY, optimize=True)
+        background = Image.new("RGB", img.size, (255, 255, 255))
+        background.paste(img.convert("RGBA"), mask=img.split()[3])
+        img = background
+
+        img.save(output_path, "JPEG", quality=JPEG_QUALITY, optimize=True, icc_profile=icc_profile)
         print(f"Saved: {output_path}")
 
 print("Done!")

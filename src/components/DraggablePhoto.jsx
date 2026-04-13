@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { motion, useMotionValue, animate } from 'framer-motion';
 
-export const CARD_W = 240;
-export const CARD_H = 240; // square card; caption lives as a hover overlay
-const GAP = 24;
+export const CARD_W = 280;
+export const CARD_H = 280; // square card; caption lives as a hover overlay
+const GAP = 12;
 
 function clamp(value, min, max) {
   return Math.max(min, Math.min(max, value));
