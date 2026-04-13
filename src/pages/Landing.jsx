@@ -11,8 +11,6 @@ export default function Landing() {
         />
         <h1 style={styles.name}>Katharine Xiao</h1>
         <nav style={styles.nav}>
-          <Link to="/blog" style={styles.link}>blog</Link>
-          <Link to="/projects" style={styles.link}>projects</Link>
           <Link to="/gallery" style={styles.link}>ceramics</Link>
           <div style={styles.divider} />
           <span style={styles.label}>Reach me at</span>
