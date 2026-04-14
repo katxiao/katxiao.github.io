@@ -4,8 +4,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { crochetItems } from '../data/crochet';
 
 function getResponsive(width) {
-  if (width < 500)  return { capacity: 2, figureHeight: 80,  padding: 16 };
-  if (width < 768)  return { capacity: 3, figureHeight: 100, padding: 32 };
+  if (width < 500)  return { capacity: 2, figureHeight: 80,  padding: 36 };
+  if (width < 768)  return { capacity: 3, figureHeight: 100, padding: 48 };
   return              { capacity: 5, figureHeight: 130, padding: 60 };
 }
 
