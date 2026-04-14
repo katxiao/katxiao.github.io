@@ -3,7 +3,11 @@ import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { crochetItems } from '../data/crochet';
 
-const SHELF_CAPACITY = 5; // figurines per shelf
+function getResponsive(width) {
+  if (width < 500)  return { capacity: 2, figureHeight: 80,  padding: 16 };
+  if (width < 768)  return { capacity: 3, figureHeight: 100, padding: 32 };
+  return              { capacity: 5, figureHeight: 130, padding: 60 };
+}
 
 // Split items into rows of SHELF_CAPACITY
 function toRows(items, perRow) {
@@ -16,7 +20,7 @@ function toRows(items, perRow) {
   return rows;
 }
 
-function Figurine({ item, index, onSelect }) {
+function Figurine({ item, index, figureHeight, onSelect }) {
   const [imgFailed, setImgFailed] = useState(false);
   return (
     <motion.div
@@ -40,7 +44,7 @@ function Figurine({ item, index, onSelect }) {
           src={item.src}
           alt={item.title}
           onError={() => setImgFailed(true)}
-          style={styles.figureImg}
+          style={{ ...styles.figureImg, height: figureHeight }}
           draggable={false}
         />
       ) : (
@@ -113,7 +117,16 @@ function InspectOverlay({ item, onClose }) {
 
 export default function Crochet() {
   const [selected, setSelected] = useState(null);
-  const rows = toRows(crochetItems, SHELF_CAPACITY);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    function onResize() { setWindowWidth(window.innerWidth); }
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  }, []);
+
+  const { capacity, figureHeight, padding } = getResponsive(windowWidth);
+  const rows = toRows(crochetItems, capacity);
 
   return (
     <div style={styles.page}>
@@ -122,15 +135,16 @@ export default function Crochet() {
         <h2 style={styles.heading}>crochet</h2>
       </header>
 
-      <div style={styles.room}>
+      <div style={{ ...styles.room, padding: `60px ${padding}px 0` }}>
         {rows.map((row, ri) => (
           <div key={ri} style={styles.shelfUnit}>
-            <div style={styles.shelfRow}>
+            <div style={{ ...styles.shelfRow, minHeight: figureHeight + 50 }}>
               {row.map((item, i) => (
                 <Figurine
                   key={item.id}
                   item={item}
-                  index={ri * SHELF_CAPACITY + i}
+                  index={ri * capacity + i}
+                  figureHeight={figureHeight}
                   onSelect={setSelected}
                 />
               ))}
