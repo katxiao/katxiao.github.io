@@ -12,6 +12,7 @@ export default function Landing() {
         <h1 style={styles.name}>Katharine Xiao</h1>
         <nav style={styles.nav}>
           <Link to="/gallery" style={styles.link}>ceramics</Link>
+          <Link to="/crochet" style={styles.link}>crochet</Link>
           <div style={styles.divider} />
           <span style={styles.label}>Reach me at</span>
           <a href="https://www.linkedin.com/in/katharine-x-5238365a/" target="_blank" rel="noreferrer" style={styles.link}>

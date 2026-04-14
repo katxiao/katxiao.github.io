@@ -1,6 +1,7 @@
 import { HashRouter, Routes, Route } from 'react-router-dom';
 import Landing from './pages/Landing';
 import Gallery from './pages/Gallery';
+import Crochet from './pages/Crochet';
 // import Blog from './pages/Blog';
 // import BlogPost from './pages/BlogPost';
 // import Projects from './pages/Projects';
@@ -12,6 +13,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/gallery" element={<Gallery />} />
+        <Route path="/crochet" element={<Crochet />} />
         {/* <Route path="/blog" element={<Blog />} /> */}
         {/* <Route path="/blog/:slug" element={<BlogPost />} /> */}
         {/* <Route path="/projects" element={<Projects />} /> */}
