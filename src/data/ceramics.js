@@ -34,12 +34,24 @@ export const ceramicItems = [
     description: 'Porcelain, Yellow Salt & Iron Yellow, 2025.'
   },
   {
+    title: 'Trinket Bowl',       
+    description: 'Porcelain, Transparent, 2025.'
+  },
+  {
+    title: 'Chawan',       
+    description: 'Porcelain, Transparent & Blue, 2025.'
+  },
+  {
     title: 'Step Mug',
     description: 'Porcelain, Blue Brown, 2025.'
   },
   {
     title: 'Blue Spiral Cup',     
     description: 'Porcelain, Turquoise Matte, 2025.'
+  },
+  {
+    title: 'Foam Mug',     
+    description: 'Porcelain, Peter Black & Alpine White, 2025.'
   },
   {
     title: 'Facet Espresso Cup',  

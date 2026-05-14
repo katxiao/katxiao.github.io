@@ -181,10 +181,6 @@ export default function DraggablePhoto({ id, src, hoverSrc, title, description, 
           />
         )}
 
-        {/* Edge fade — inset shadow blends image borders into the white page background.
-            Adjust the two px values (blur spread) to taste. */}
-        <div style={styles.edgeFade} />
-
         {/* Caption overlay — fades in and slides up on hover */}
         <motion.div
           variants={overlayVariants}
@@ -239,13 +235,6 @@ const styles = {
     letterSpacing: '0.15em',
     textTransform: 'uppercase',
     color: '#bbb',
-  },
-  edgeFade: {
-    position: 'absolute',
-    inset: 0,
-    boxShadow: 'inset 0 0 40px 18px rgba(255, 255, 255, 0.92)',
-    pointerEvents: 'none',
-    zIndex: 1,
   },
   overlay: {
     position: 'absolute',

@@ -57,7 +57,6 @@ function GridPhoto({ item }) {
             }}
           />
         )}
-        <div style={styles.edgeFade} />
         <div style={{
           ...styles.gridOverlay,
           opacity: hovered ? 1 : 0,
@@ -222,12 +221,6 @@ const styles = {
     height: '100%',
     objectFit: 'cover',
     display: 'block',
-  },
-  edgeFade: {
-    position: 'absolute',
-    inset: 0,
-    boxShadow: 'inset 0 0 40px 18px rgba(255, 255, 255, 0.92)',
-    pointerEvents: 'none',
   },
   gridOverlay: {
     position: 'absolute',
