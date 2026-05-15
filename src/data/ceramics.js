@@ -26,51 +26,51 @@ function resolveImagePaths(item, index) {
 
 export const ceramicItems = [
   {
-    title: 'Wavy Bowl',           
+    title: 'Wavy Bowl',
     description: 'Porcelain, Yellow Salt, 2025.'
   },
   {
-    title: 'Splatter Vase',       
-    description: 'White Stoneware, Yellow Salt & Iron Yellow, 2025.'
-  },
-  {
-    title: 'Trinket Bowl',       
+    title: 'Trinket Bowl',
     description: 'Porcelain, Transparent & Vegas Red, 2025.'
   },
   {
-    title: 'Chawan',       
+    title: 'Splatter Vase',
+    description: 'White Stoneware, Yellow Salt & Iron Yellow, 2025.'
+  },
+  {
+    title: 'Chawan',
     description: 'Porcelain, Transparent & Vegas Blue, 2025.'
   },
   {
-    title: 'Step Mug',
+    title: 'Spiral Mug',
     description: 'Porcelain, Blue Brown, 2025.'
   },
   {
-    title: 'Blue Spiral Cup',     
-    description: 'Porcelain, Turquoise Matte, 2025.'
+    title: 'Drip Bowl',
+    description: 'Brown Stoneware, Titanium Shino & Vegas Blue, 2025.'
   },
   {
-    title: 'Foam Mug',     
+    title: 'Foam Mug',
     description: 'Porcelain, Peter Black & Alpine White, 2025.'
   },
   {
-    title: 'Facet Espresso Cup',  
+    title: 'Facet Espresso Cup',
     description: 'Porcelain, Peter Black & Alpine White, 2025.'
-  },
-  {
-    title: 'Spiral Mug',         
-    description: 'Porcelain, Blue Brown, 2025.'
   },
   {
     title: 'Blue Brown Espresso Cup',
     description: 'Porcelain, Blue Brown, 2025.'
   },
   {
-    title: 'Drip Bowl',        
-    description: 'Brown Stoneware, Titanium Shino & Vegas Blue, 2025.'
+    title: 'Blue Spiral Cup',
+    description: 'Porcelain, Turquoise Matte, 2025.'
   },
   {
-    title: 'Seafoam Mug',        
+    title: 'Step Mug',
+    description: 'Porcelain, Blue Brown, 2025.'
+  },
+  {
+    title: 'Seafoam Mug',
     description: 'Porcelain, Seafoam & Alpine White, 2025.'
   },
 ].map(resolveImagePaths);
