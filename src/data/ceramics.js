@@ -31,15 +31,15 @@ export const ceramicItems = [
   },
   {
     title: 'Splatter Vase',       
-    description: 'Porcelain, Yellow Salt & Iron Yellow, 2025.'
+    description: 'White Stoneware, Yellow Salt & Iron Yellow, 2025.'
   },
   {
     title: 'Trinket Bowl',       
-    description: 'Porcelain, Transparent, 2025.'
+    description: 'Porcelain, Transparent & Vegas Red, 2025.'
   },
   {
     title: 'Chawan',       
-    description: 'Porcelain, Transparent & Blue, 2025.'
+    description: 'Porcelain, Transparent & Vegas Blue, 2025.'
   },
   {
     title: 'Step Mug',
@@ -64,6 +64,10 @@ export const ceramicItems = [
   {
     title: 'Blue Brown Espresso Cup',
     description: 'Porcelain, Blue Brown, 2025.'
+  },
+  {
+    title: 'Drip Bowl',        
+    description: 'Brown Stoneware, Titanium Shino & Vegas Blue, 2025.'
   },
   {
     title: 'Seafoam Mug',        
